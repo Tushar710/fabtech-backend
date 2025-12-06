@@ -1,0 +1,1795 @@
+🚀 Server running on port 5001
+📍 API URL: http://localhost:5001
+🔗 Test endpoint: http://localhost:5001/api/leads
+✅ Connected to MongoDB
+2025-10-08T17:22:26.417Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759941204,
+  exp: 1760027604
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759941204,
+  exp: 1760027604,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759941204,
+  exp: 1760027604,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 3 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 3,
+  recentLeadsCount: 3,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+2025-10-08T17:23:08.733Z - POST /api/company-auth/login
+2025-10-08T17:23:09.001Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:23:09.007Z - GET /api/chat/online-users
+2025-10-08T17:23:09.009Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:23:09.009Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:23:09.011Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944188,
+  "exp": 1760030588,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944188,
+  exp: 1760030588,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:23:09.013Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:23:09.014Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:23:09.014Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:23:09.074Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:23:09.076Z - GET /api/chat/online-users
+2025-10-08T17:23:09.078Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:23:09.080Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:23:09.149Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:23:09.150Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944188,
+  "exp": 1760030588,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944188,
+  exp: 1760030588,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:23:09.152Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944188,
+  exp: 1760030588
+}
+🆔 Employee ID extracted: undefined
+2025-10-08T17:23:09.219Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944188,
+  exp: 1760030588
+}
+🆔 Employee ID extracted: undefined
+2025-10-08T17:23:30.856Z - POST /api/company-auth/login
+🔐 Employee login attempt: { email: 'parshwa@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65e20b34dbf9e4b5bd70a"),
+  name: 'parshwa ',
+  email: 'parshwa@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e63bfa6bc050bb4675c9a6"),
+  department: new ObjectId("68e64f9caa210bc0a3566b0b")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:23:43.722Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944223,
+  exp: 1760030623
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944223,
+  exp: 1760030623,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944223,
+  exp: 1760030623,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:23:44.025Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944223,
+  exp: 1760030623
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944223,
+  exp: 1760030623,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944223,
+  exp: 1760030623,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:23:44.051Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:23:44.053Z - GET /api/chat/online-users
+2025-10-08T17:23:44.128Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:23:44.130Z - GET /api/chat/online-users
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:23:44.265Z - GET /api/chat/online-users
+2025-10-08T17:23:44.266Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:24:26.926Z - POST /api/company-auth/login
+2025-10-08T17:24:27.231Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:24:27.232Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:24:27.232Z - GET /api/chat/online-users
+2025-10-08T17:24:27.239Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:24:27.240Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:24:27.242Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:24:27.242Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:24:27.242Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:24:27.389Z - GET /api/chat/online-users
+2025-10-08T17:24:27.390Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:24:27.390Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:24:27.400Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:24:27.468Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:24:27.474Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:24:27.475Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667
+}
+🆔 Employee ID extracted: undefined
+2025-10-08T17:24:27.540Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667
+}
+🆔 Employee ID extracted: undefined
+2025-10-08T17:24:37.458Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:24:37.459Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:24:57.232Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:25:06.418Z - POST /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+📱 Sending welcome message to new lead: 9875897592
+📱 Sending WhatsApp message to: 9875897592
+📝 Message: नमस्ते sagar! आपकी inquiry के लिए धन्यवाद। हमारी team जल्दी ही आपसे संपर्क करेगी। 🙏
+🔗 API URL: https://webhook.whatapi.in/webhook/68c92f20bde42bbd9075014f?number=919875897592&message=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20sagar!%20%E0%A4%86%E0%A4%AA%E0%A4%95%E0%A5%80%20inquiry%20%E0%A4%95%E0%A5%87%20%E0%A4%B2%E0%A4%BF%E0%A4%8F%20%E0%A4%A7%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%B5%E0%A4%BE%E0%A4%A6%E0%A5%A4%20%E0%A4%B9%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%80%20team%20%E0%A4%9C%E0%A4%B2%E0%A5%8D%E0%A4%A6%E0%A5%80%20%E0%A4%B9%E0%A5%80%20%E0%A4%86%E0%A4%AA%E0%A4%B8%E0%A5%87%20%E0%A4%B8%E0%A4%82%E0%A4%AA%E0%A4%B0%E0%A5%8D%E0%A4%95%20%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%97%E0%A5%80%E0%A5%A4%20%F0%9F%99%8F
+2025-10-08T17:25:06.603Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:25:09.571Z - GET /api/employees
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+🔍 Getting employees with company filtering...
+🔍 Company ID from auth middleware: 68e63bfa6bc050bb4675c9a6
+📋 Employee query filter: { company: '68e63bfa6bc050bb4675c9a6', isActive: { '$ne': false } }
+📊 Found 1 employees for company 68e63bfa6bc050bb4675c9a6
+📋 Employee names: [ 'parshwa ' ]
+2025-10-08T17:25:09.693Z - GET /api/departments
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+🔍 Fetching departments for company: 68e63bfa6bc050bb4675c9a6
+📊 Found 1 departments for company 68e63bfa6bc050bb4675c9a6
+2025-10-08T17:25:09.884Z - GET /api/departments/sales-departments
+Authorization header present
+🔍 Fetching sales departments and employees...
+🔍 Decoded token in sales-departments route: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667
+}
+❌ No company ID found - returning empty response
+✅ WhatsApp message sent successfully
+📊 Response: { accepted: true }
+✅ Welcome message sent successfully to: 9875897592
+2025-10-08T17:25:20.516Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:25:24.741Z - PUT /api/lead-assignment/bulk-assign
+Authorization header present
+🔄 Bulk assign request received: {
+  leadIds: [ '68e69e72eb8ee7be4eb4259d' ],
+  assignedTo: '68e65e20b34dbf9e4b5bd70a',
+  assignmentNotes: 'Bulk assignment of 1 leads',
+  priority: 'medium'
+}
+Error sending assignment notification: Error: ScheduledMessage validation failed: messageType: `assignment` is not a valid enum value for path `messageType`.
+    at ValidationError.inspect (/Users/tusharpawar/Desktop/fabtech/backend-files/node_modules/mongoose/lib/error/validation.js:50:26)
+    at formatValue (node:internal/util/inspect:887:19)
+    at inspect (node:internal/util/inspect:409:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2441:40)
+    at formatWithOptions (node:internal/util/inspect:2303:10)
+    at console.value (node:internal/console/constructor:345:14)
+    at console.error (node:internal/console/constructor:412:61)
+    at LeadLifecycleMessaging.sendAssignmentNotification (/Users/tusharpawar/Desktop/fabtech/backend-files/services/leadLifecycleMessaging.js:87:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /Users/tusharpawar/Desktop/fabtech/backend-files/routes/leadAssignment.js:389:7 {
+  errors: {
+    messageType: ValidatorError: `assignment` is not a valid enum value for path `messageType`.
+        at validate (/Users/tusharpawar/Desktop/fabtech/backend-files/node_modules/mongoose/lib/schematype.js:1365:13)
+        at SchemaType.doValidate (/Users/tusharpawar/Desktop/fabtech/backend-files/node_modules/mongoose/lib/schematype.js:1349:7)
+        at /Users/tusharpawar/Desktop/fabtech/backend-files/node_modules/mongoose/lib/document.js:3004:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:85:11) {
+      properties: [Object],
+      kind: 'enum',
+      path: 'messageType',
+      value: 'assignment',
+      reason: undefined,
+      Symbol(mongoose:validatorError): true
+    }
+  },
+  _message: 'ScheduledMessage validation failed'
+}
+2025-10-08T17:25:27.232Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:25:27.963Z - GET /api/chat/online-users
+2025-10-08T17:25:27.965Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:25:27.966Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:25:27.967Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:25:27.967Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:25:27.968Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:25:27.969Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:25:27.969Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:25:28.076Z - GET /api/chat/online-users
+2025-10-08T17:25:28.078Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:25:28.078Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:25:28.080Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:25:28.154Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667
+}
+🆔 Employee ID extracted: undefined
+2025-10-08T17:25:28.155Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:25:28.158Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759944267,
+  "exp": 1760030667,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:25:28.266Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759944267,
+  exp: 1760030667
+}
+🆔 Employee ID extracted: undefined
+🔐 Employee login attempt: { email: 'parshwa@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65e20b34dbf9e4b5bd70a"),
+  name: 'parshwa ',
+  email: 'parshwa@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e63bfa6bc050bb4675c9a6"),
+  department: new ObjectId("68e64f9caa210bc0a3566b0b")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:25:38.767Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:25:39.061Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:39.079Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:39.081Z - GET /api/chat/online-users
+2025-10-08T17:25:39.153Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:39.156Z - GET /api/chat/online-users
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:25:39.304Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:39.304Z - GET /api/chat/online-users
+2025-10-08T17:25:41.207Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:25:41.609Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:41.614Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:41.615Z - GET /api/chat/online-users
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:41.716Z - GET /api/chat/online-users
+2025-10-08T17:25:41.718Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:25:41.863Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:25:41.865Z - GET /api/chat/online-users
+🔐 Employee login attempt: { email: 'pawartushar@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65752b34dbf9e4b5bd6a0"),
+  name: 'Tushar Pawar',
+  email: 'pawartushar@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e6368c699072848aec9a02"),
+  department: new ObjectId("68e656a7b34dbf9e4b5bd686")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:30:20.504Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:30:41.212Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:30:57.635Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:30:57.636Z - GET /api/chat/online-users
+2025-10-08T17:30:57.747Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:30:58.322Z - GET /api/chat/online-users
+🔐 Employee login attempt: { email: 'pawartushar@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65752b34dbf9e4b5bd6a0"),
+  name: 'Tushar Pawar',
+  email: 'pawartushar@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e6368c699072848aec9a02"),
+  department: new ObjectId("68e656a7b34dbf9e4b5bd686")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:34:08.491Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944816,
+  exp: 1760031216
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944816,
+  exp: 1760031216,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944816,
+  exp: 1760031216,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 0 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 0,
+  recentLeadsCount: 0,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+🔐 Employee login attempt: { email: 'pawartushar@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65752b34dbf9e4b5bd6a0"),
+  name: 'Tushar Pawar',
+  email: 'pawartushar@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e6368c699072848aec9a02"),
+  department: new ObjectId("68e656a7b34dbf9e4b5bd686")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:35:20.514Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:35:41.208Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:35:41.545Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:35:41.546Z - GET /api/chat/online-users
+2025-10-08T17:35:41.619Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:35:41.628Z - GET /api/chat/online-users
+2025-10-08T17:35:45.940Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944895,
+  exp: 1760031295
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944895,
+  exp: 1760031295,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944895,
+  exp: 1760031295,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 0 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 0,
+  recentLeadsCount: 0,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+🔐 Employee login attempt: { email: 'pawartushar@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65752b34dbf9e4b5bd6a0"),
+  name: 'Tushar Pawar',
+  email: 'pawartushar@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e6368c699072848aec9a02"),
+  department: new ObjectId("68e656a7b34dbf9e4b5bd686")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:36:45.238Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944895,
+  exp: 1760031295
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944895,
+  exp: 1760031295,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944895,
+  exp: 1760031295,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 0 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 0,
+  recentLeadsCount: 0,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+🔐 Employee login attempt: { email: 'pawartushar@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65752b34dbf9e4b5bd6a0"),
+  name: 'Tushar Pawar',
+  email: 'pawartushar@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e6368c699072848aec9a02"),
+  department: new ObjectId("68e656a7b34dbf9e4b5bd686")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:37:13.832Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945018,
+  exp: 1760031418
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945018,
+  exp: 1760031418,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945018,
+  exp: 1760031418,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 0 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 0,
+  recentLeadsCount: 0,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+2025-10-08T17:37:31.067Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:37:31.324Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759940517,
+  exp: 1760026917,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:37:31.342Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:37:31.343Z - GET /api/chat/online-users
+2025-10-08T17:37:31.412Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:37:31.414Z - GET /api/chat/online-users
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:37:31.569Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:37:31.570Z - GET /api/chat/online-users
+2025-10-08T17:39:46.006Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945018,
+  exp: 1760031418
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945018,
+  exp: 1760031418,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945018,
+  exp: 1760031418,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 3 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 3,
+  recentLeadsCount: 3,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+2025-10-08T17:40:41.207Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:40:41.488Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:40:41.489Z - GET /api/chat/online-users
+2025-10-08T17:40:41.563Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:40:41.565Z - GET /api/chat/online-users
+2025-10-08T17:41:58.514Z - POST /api/company-auth/login
+🔐 Employee login attempt: { email: 'pawartushar710@gmail.com', employeeId: undefined }
+❌ Employee not found for email: pawartushar710@gmail.com
+🔐 Employee login attempt: { email: 'pawartushar@gmail.com', employeeId: undefined }
+✅ Employee found: {
+  id: new ObjectId("68e65752b34dbf9e4b5bd6a0"),
+  name: 'Tushar Pawar',
+  email: 'pawartushar@gmail.com',
+  password: '123456',
+  company: new ObjectId("68e6368c699072848aec9a02"),
+  department: new ObjectId("68e656a7b34dbf9e4b5bd686")
+}
+🔍 Password verification: {
+  inputPassword: '123456',
+  storedPassword: '123456',
+  passwordsMatch: true
+}
+🔍 Plain text password match: SUCCESS
+✅ Password validation successful
+2025-10-08T17:42:44.332Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945364,
+  exp: 1760031764
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945364,
+  exp: 1760031764,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945364,
+  exp: 1760031764,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 3 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 3,
+  recentLeadsCount: 3,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+2025-10-08T17:42:44.569Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945364,
+  exp: 1760031764
+}
+✅ Employee verified: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945364,
+  exp: 1760031764,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 Fetching dashboard data for employee: 68e65752b34dbf9e4b5bd6a0
+📊 Employee object: {
+  employeeId: '68e65752b34dbf9e4b5bd6a0',
+  email: 'pawartushar@gmail.com',
+  companyId: '68e6368c699072848aec9a02',
+  departmentId: '68e656a7b34dbf9e4b5bd686',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759945364,
+  exp: 1760031764,
+  id: '68e65752b34dbf9e4b5bd6a0',
+  name: 'pawartushar'
+}
+📊 About to query with employeeId: 68e65752b34dbf9e4b5bd6a0
+📊 ObjectId conversion: 68e65752b34dbf9e4b5bd6a0
+📊 Fresh connection query found 3 assigned leads for employee 68e65752b34dbf9e4b5bd6a0
+2025-10-08T17:42:44.583Z - GET /api/chat/conversations/68e65752b34dbf9e4b5bd6a0
+2025-10-08T17:42:44.584Z - GET /api/chat/online-users
+2025-10-08T17:42:44.672Z - GET /api/chat/online-users
+2025-10-08T17:42:44.673Z - GET /api/chat/conversations/68e65752b34dbf9e4b5bd6a0
+📊 Dashboard response: {
+  totalLeads: 3,
+  recentLeadsCount: 3,
+  employeeId: '68e65752b34dbf9e4b5bd6a0'
+}
+2025-10-08T17:42:44.813Z - GET /api/chat/conversations/68e65752b34dbf9e4b5bd6a0
+2025-10-08T17:42:44.814Z - GET /api/chat/online-users
+2025-10-08T17:42:52.190Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:43:29.261Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:43:29.558Z - GET /api/employee-dashboard/dashboard
+Authorization header present
+✅ JWT verified successfully: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738
+}
+✅ Employee verified: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 Fetching dashboard data for employee: 68e65e20b34dbf9e4b5bd70a
+📊 Employee object: {
+  employeeId: '68e65e20b34dbf9e4b5bd70a',
+  email: 'parshwa@gmail.com',
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  departmentId: '68e64f9caa210bc0a3566b0b',
+  role: 'Employee',
+  type: 'employee',
+  iat: 1759944338,
+  exp: 1760030738,
+  id: '68e65e20b34dbf9e4b5bd70a',
+  name: 'parshwa'
+}
+📊 About to query with employeeId: 68e65e20b34dbf9e4b5bd70a
+📊 ObjectId conversion: 68e65e20b34dbf9e4b5bd70a
+📊 Fresh connection query found 1 assigned leads for employee 68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:43:29.563Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:43:29.563Z - GET /api/chat/online-users
+2025-10-08T17:43:29.637Z - GET /api/chat/online-users
+2025-10-08T17:43:29.645Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+📊 Dashboard response: {
+  totalLeads: 1,
+  recentLeadsCount: 1,
+  employeeId: '68e65e20b34dbf9e4b5bd70a'
+}
+2025-10-08T17:43:29.805Z - GET /api/chat/conversations/68e65e20b34dbf9e4b5bd70a
+2025-10-08T17:43:29.806Z - GET /api/chat/online-users
+2025-10-08T17:43:49.637Z - POST /api/company-auth/login
+2025-10-08T17:43:49.878Z - GET /api/chat/online-users
+2025-10-08T17:43:49.878Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:43:49.879Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:43:49.879Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:43:49.879Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:43:49.880Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759945429,
+  "exp": 1760031829,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759945429,
+  exp: 1760031829,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:43:49.880Z - GET /api/lead-statuses
+Authorization header present
+2025-10-08T17:43:49.880Z - GET /api/form-fields
+Authorization header present
+2025-10-08T17:43:50.040Z - GET /api/follow-up/upcoming
+Authorization header present
+2025-10-08T17:43:50.041Z - GET /api/chat/conversations/68e63bfa6bc050bb4675c9a6
+2025-10-08T17:43:50.043Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:43:50.048Z - GET /api/chat/online-users
+2025-10-08T17:43:50.126Z - GET /api/leads
+Authorization header present
+🔍 Auth middleware - User: {
+  "companyId": "68e63bfa6bc050bb4675c9a6",
+  "companyCode": "2525",
+  "businessName": "Infoyashonand ",
+  "iat": 1759945429,
+  "exp": 1760031829,
+  "id": "68e63bfa6bc050bb4675c9a6"
+}
+🏢 Auth middleware - Company ID: 68e63bfa6bc050bb4675c9a6
+🎯 Auth middleware - Role: undefined
+🆔 Auth middleware - User ID: 68e63bfa6bc050bb4675c9a6
+🔄 Auth middleware - Full token payload: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759945429,
+  exp: 1760031829,
+  id: '68e63bfa6bc050bb4675c9a6'
+}
+2025-10-08T17:43:50.152Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759945429,
+  exp: 1760031829
+}
+🆔 Employee ID extracted: undefined
+2025-10-08T17:43:50.153Z - GET /api/follow-up/overdue
+Authorization header present
+2025-10-08T17:43:50.287Z - GET /api/employee-dashboard/leads
+Authorization header present
+📋 Employee dashboard leads request
+✅ JWT decoded: {
+  companyId: '68e63bfa6bc050bb4675c9a6',
+  companyCode: '2525',
+  businessName: 'Infoyashonand ',
+  iat: 1759945429,
+  exp: 1760031829
+}
+🆔 Employee ID extracted: undefined
