@@ -143,7 +143,7 @@ router.post('/', auth, async (req, res) => {
       leadName: lead.customerName || lead.name,
       leadEmail: lead.email,
       leadPhone: lead.contactNumber || lead.phone,
-      leadCompany: req.body.leadCompany || lead.company || lead.customerName,
+      leadCompany: req.body.leadCompany || lead.companyName || lead.company_name || lead.customerCompany || lead.customerName,
       leadAddress: req.body.leadAddress || lead.address,
       leadGST: req.body.leadGST || lead.gstNumber,
       items: processedItems,
