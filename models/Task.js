@@ -49,6 +49,11 @@ const taskSchema = new mongoose.Schema({
     default: 'pending'
   },
   dueDate: Date,
+  startDate: {
+    type: Date,
+    default: Date.now
+  },
+  completionDate: Date,
   companyId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Company',

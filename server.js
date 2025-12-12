@@ -153,6 +153,9 @@ app.use('/api/branch-admin', require('./routes/branchAdmin'));
 // Task Management Routes
 app.use('/api/tasks', require('./routes/tasks'));
 
+// Self Reporting Routes
+app.use('/api/self-reports', require('./routes/selfReports'));
+
 // Product Management Routes
 app.use('/api/product-categories', require('./routes/productCategory'));
 app.use('/api/products', require('./routes/products'));

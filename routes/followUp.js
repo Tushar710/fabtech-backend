@@ -533,6 +533,78 @@ router.put('/complete/:leadId/:followUpId', async (req, res) => {
   }
 });
 
+// Delete follow-up
+router.delete('/delete/:leadId/:followUpId', async (req, res) => {
+  try {
+    const { leadId, followUpId } = req.params;
+
+    console.log('🗑️ Delete follow-up request:', {
+      leadId,
+      followUpId
+    });
+
+    const lead = await Lead.findById(leadId);
+    if (!lead) {
+      console.log('❌ Lead not found:', leadId);
+      return res.status(404).json({
+        success: false,
+        message: 'Lead not found'
+      });
+    }
+
+    console.log('📋 Lead found, follow-ups count:', lead.followUps.length);
+
+    const followUp = lead.followUps.id(followUpId);
+    if (!followUp) {
+      console.log('❌ Follow-up not found:', followUpId);
+      return res.status(404).json({
+        success: false,
+        message: 'Follow-up not found'
+      });
+    }
+
+    console.log('🗑️ Removing follow-up from array');
+
+    // Remove the follow-up using pull method
+    lead.followUps.pull(followUpId);
+
+    // Update lead's next follow-up to the next pending one
+    const nextPendingFollowUp = lead.followUps
+      .filter(f => !f.completed && f.nextFollowUpDate)
+      .sort((a, b) => new Date(a.nextFollowUpDate) - new Date(b.nextFollowUpDate))[0];
+    
+    if (nextPendingFollowUp) {
+      lead.nextFollowUp = nextPendingFollowUp.nextFollowUpDate;
+    } else {
+      lead.nextFollowUp = null;
+    }
+
+    await lead.save();
+
+    console.log('✅ Follow-up deleted successfully:', {
+      leadId,
+      followUpId
+    });
+
+    res.json({
+      success: true,
+      message: 'Follow-up deleted successfully',
+      data: {
+        deletedFollowUpId: followUpId,
+        nextFollowUp: lead.nextFollowUp
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Error deleting follow-up:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete follow-up',
+      error: error.message
+    });
+  }
+});
+
 // Get follow-up statistics
 router.get('/stats/:userId?', async (req, res) => {
   try {

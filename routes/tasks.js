@@ -228,6 +228,14 @@ router.put('/:id', auth, async (req, res) => {
       });
     }
 
+    // Check if task is completed - prevent editing
+    if (task.status === 'completed' && task.completionDate) {
+      return res.status(403).json({
+        success: false,
+        message: 'Cannot edit a completed task. Task is locked.'
+      });
+    }
+
     // Check if user has permission to update
     const companyId = req.user.companyId || req.user.company;
     if (task.companyId.toString() !== companyId.toString()) {
@@ -289,6 +297,14 @@ router.patch('/:id/status', auth, async (req, res) => {
       });
     }
 
+    // Check if task is already completed - prevent further updates
+    if (task.status === 'completed' && task.completionDate) {
+      return res.status(403).json({
+        success: false,
+        message: 'Cannot update a completed task. Task is locked.'
+      });
+    }
+
     // Add update to history
     const update = {
       status,
@@ -301,6 +317,12 @@ router.patch('/:id/status', auth, async (req, res) => {
 
     task.status = status;
     task.updates.push(update);
+    
+    // Set completion date when task is marked as completed
+    if (status === 'completed' && !task.completionDate) {
+      task.completionDate = new Date();
+      console.log('✅ Task completed on:', task.completionDate);
+    }
     
     await task.save();
 
