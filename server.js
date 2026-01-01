@@ -12,22 +12,22 @@ const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
+
     const allowedOrigins = [
-      'http://localhost:3000', 
-      'http://localhost:3001', 
-      'http://localhost:3002', 
-      'http://localhost:3003', 
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:3002',
+      'http://localhost:3003',
       'http://localhost:3005',
       'https://vangangaaindustries.com',
-      'https://kharefabtech.com', 
+      'https://kharefabtech.com',
       'http://kharefabtech.com',
-      'https://shivshambhuvivah.com', 
+      'https://shivshambhuvivah.com',
       'http://shivshambhuvivah.com',
       'https://www.shivshambhuvivah.com',
       'http://www.shivshambhuvivah.com'
     ];
-    
+
     // Allow all origins for development/testing
     if (process.env.NODE_ENV !== 'production' || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -62,10 +62,10 @@ mongoose.connection.on('error', (err) => {
 
 // Test endpoint
 app.get('/api/test', (req, res) => {
-  res.json({ 
-    success: true, 
-    message: 'Backend is working!', 
-    timestamp: new Date().toISOString() 
+  res.json({
+    success: true,
+    message: 'Backend is working!',
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -74,8 +74,8 @@ app.get('/', (req, res) => {
   const host = req.get('host');
   const protocol = req.get('x-forwarded-proto') || req.protocol;
   const baseUrl = `${protocol}://${host}`;
-  
-  res.json({ 
+
+  res.json({
     message: 'FABTECH CRM Backend Server Running',
     version: '1.0.0',
     host: host,
@@ -152,6 +152,7 @@ app.use('/api/branch-admin', require('./routes/branchAdmin'));
 
 // Task Management Routes
 app.use('/api/tasks', require('./routes/tasks'));
+
 
 // Reminder Routes
 app.use('/api/reminders', require('./routes/reminders'));
