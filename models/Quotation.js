@@ -123,7 +123,7 @@ const quotationSchema = new mongoose.Schema({
   },
   createdByModel: {
     type: String,
-    enum: ['User', 'Employee'],
+    enum: ['User', 'Employee', 'Company'],
     default: 'User'
   },
   sentAt: {

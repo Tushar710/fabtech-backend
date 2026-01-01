@@ -198,8 +198,14 @@ router.post('/', auth, async (req, res) => {
       warranty: req.body.warranty,
       companyInfo: req.body.companyInfo,
       createdBy: req.user.id || req.user._id || req.user.employeeId,
-      createdByModel: req.user.type === 'employee' ? 'Employee' : 'User'
+      createdByModel: req.user.role === 'employee' ? 'Employee' :
+        (req.user.role === 'company' || req.user.companyId) ? 'Company' : 'User'
     });
+
+    console.log('📝 Creating quotation with:');
+    console.log('   - createdBy:', quotation.createdBy);
+    console.log('   - createdByModel:', quotation.createdByModel);
+    console.log('   - req.user:', JSON.stringify(req.user, null, 2));
 
     await quotation.save();
 
