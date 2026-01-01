@@ -13,14 +13,14 @@ async function generateQuotationNumber() {
   const yearShort = currentYear.toString().slice(-2);
   const nextYearShort = nextYear.toString().slice(-2);
   const prefix = `KFT-${yearShort}/${nextYearShort}-`;
-  
+
   // Find all quotations for this year and extract numbers
   const quotations = await Quotation.find({
     quotationNumber: { $regex: `^KFT-${yearShort}/${nextYearShort}-` }
   }).select('quotationNumber');
-  
+
   let maxNumber = 0;
-  
+
   // Extract all numbers and find the maximum
   quotations.forEach(q => {
     const parts = q.quotationNumber.split('-');
@@ -31,9 +31,9 @@ async function generateQuotationNumber() {
       }
     }
   });
-  
+
   const nextNumber = maxNumber + 1;
-  
+
   return `${prefix}${nextNumber}`;
 }
 
@@ -42,15 +42,15 @@ router.get('/', auth, async (req, res) => {
   try {
     const { status, leadId } = req.query;
     const filter = { createdBy: req.user.id };
-    
+
     if (status) filter.status = status;
     if (leadId) filter.lead = leadId;
-    
+
     const quotations = await Quotation.find(filter)
       .populate('lead', 'name email phone')
       .populate('items.product', 'name sku')
       .sort({ createdAt: -1 });
-    
+
     res.json(quotations);
   } catch (error) {
     console.error('Error fetching quotations:', error);
@@ -65,13 +65,13 @@ router.get('/:id', auth, async (req, res) => {
       _id: req.params.id,
       createdBy: req.user.id
     })
-    .populate('lead', 'name email phone')
-    .populate('items.product', 'name sku description');
-    
+      .populate('lead', 'name email phone')
+      .populate('items.product', 'name sku description');
+
     if (!quotation) {
       return res.status(404).json({ message: 'Quotation not found' });
     }
-    
+
     res.json(quotation);
   } catch (error) {
     console.error('Error fetching quotation:', error);
@@ -83,7 +83,7 @@ router.get('/:id', auth, async (req, res) => {
 router.post('/', auth, async (req, res) => {
   try {
     console.log('Received quotation request body:', req.body);
-    
+
     const {
       leadId,
       items,
@@ -100,7 +100,7 @@ router.post('/', auth, async (req, res) => {
     if (!lead) {
       return res.status(404).json({ message: 'Lead not found' });
     }
-    
+
     console.log('Found lead:', lead.customerName, lead.email);
 
     // Generate quotation number
@@ -112,25 +112,25 @@ router.post('/', auth, async (req, res) => {
 
     for (const item of items) {
       let processedItem;
-      
+
       // Check if this is a manual entry (no productId) or database product
       if (!item.productId || item.productId === '') {
         // Manual entry - use provided data directly
         console.log('Processing manual entry:', item.productName);
         console.log('Manual entry item data:', JSON.stringify(item, null, 2));
-        
+
         const discount = item.discount || 0;
         const unitPrice = parseFloat(item.unitPrice);
-        
+
         // Validate unitPrice
         if (isNaN(unitPrice) || unitPrice <= 0) {
           console.error('Invalid unit price for manual entry:', item.unitPrice);
-          return res.status(400).json({ 
+          return res.status(400).json({
             success: false,
-            message: `Invalid unit price for ${item.productName}. Please enter a valid price.` 
+            message: `Invalid unit price for ${item.productName}. Please enter a valid price.`
           });
         }
-        
+
         const finalUnitPrice = unitPrice * (1 - discount / 100);
         const totalPrice = finalUnitPrice * item.quantity;
         subtotal += totalPrice;
@@ -145,7 +145,7 @@ router.post('/', auth, async (req, res) => {
           discount: discount,
           totalPrice: totalPrice
         };
-        
+
         console.log('✅ Manual entry processed:', processedItem);
       } else {
         // Database product - fetch from database
@@ -170,7 +170,7 @@ router.post('/', auth, async (req, res) => {
           totalPrice: totalPrice
         };
       }
-      
+
       processedItems.push(processedItem);
     }
 
@@ -197,42 +197,43 @@ router.post('/', auth, async (req, res) => {
       termsAndConditions,
       warranty: req.body.warranty,
       companyInfo: req.body.companyInfo,
-      createdBy: req.user.id
+      createdBy: req.user.id || req.user._id || req.user.employeeId,
+      createdByModel: req.user.type === 'employee' ? 'Employee' : 'User'
     });
 
     await quotation.save();
-    
+
     // Update lead status to "Quoted" and increment quotation count
-    await Lead.findByIdAndUpdate(leadId, { 
+    await Lead.findByIdAndUpdate(leadId, {
       status: 'Quoted',
       lastQuotationDate: new Date(),
       $inc: { quotationCount: 1 }
     });
-    
+
     // Populate the response
     await quotation.populate('lead', 'name email phone');
     await quotation.populate('items.product', 'name sku');
-    
+
     res.status(201).json(quotation);
   } catch (error) {
     console.error('Error creating quotation:', error);
     console.error('Error name:', error.name);
     console.error('Error message:', error.message);
-    
+
     // Handle validation errors
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map(err => err.message);
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         message: 'Validation error',
-        errors: messages 
+        errors: messages
       });
     }
-    
-    res.status(500).json({ 
+
+    res.status(500).json({
       success: false,
       message: 'Server error',
-      error: error.message 
+      error: error.message
     });
   }
 });
@@ -244,7 +245,7 @@ router.put('/:id', auth, async (req, res) => {
       _id: req.params.id,
       createdBy: req.user.id
     });
-    
+
     if (!quotation) {
       return res.status(404).json({ message: 'Quotation not found' });
     }
@@ -256,10 +257,10 @@ router.put('/:id', auth, async (req, res) => {
 
     Object.assign(quotation, req.body);
     await quotation.save();
-    
+
     await quotation.populate('lead', 'name email phone');
     await quotation.populate('items.product', 'name sku');
-    
+
     res.json(quotation);
   } catch (error) {
     console.error('Error updating quotation:', error);
@@ -274,7 +275,7 @@ router.post('/:id/send', auth, async (req, res) => {
       _id: req.params.id,
       createdBy: req.user.id
     });
-    
+
     if (!quotation) {
       return res.status(404).json({ message: 'Quotation not found' });
     }
@@ -282,10 +283,10 @@ router.post('/:id/send', auth, async (req, res) => {
     quotation.status = 'sent';
     quotation.sentAt = new Date();
     await quotation.save();
-    
+
     // Here you would integrate with email service
     // For now, we'll just update the status
-    
+
     res.json({ message: 'Quotation sent successfully', quotation });
   } catch (error) {
     console.error('Error sending quotation:', error);
@@ -300,7 +301,7 @@ router.post('/:id/accept', auth, async (req, res) => {
       _id: req.params.id,
       createdBy: req.user.id
     });
-    
+
     if (!quotation) {
       return res.status(404).json({ message: 'Quotation not found' });
     }
@@ -308,12 +309,12 @@ router.post('/:id/accept', auth, async (req, res) => {
     quotation.status = 'accepted';
     quotation.acceptedAt = new Date();
     await quotation.save();
-    
+
     // Update lead status to "Accepted"
-    await Lead.findByIdAndUpdate(quotation.lead, { 
+    await Lead.findByIdAndUpdate(quotation.lead, {
       status: 'Accepted'
     });
-    
+
     res.json({ message: 'Quotation accepted', quotation });
   } catch (error) {
     console.error('Error accepting quotation:', error);
@@ -325,12 +326,12 @@ router.post('/:id/accept', auth, async (req, res) => {
 router.post('/:id/reject', auth, async (req, res) => {
   try {
     const { rejectionReason } = req.body;
-    
+
     const quotation = await Quotation.findOne({
       _id: req.params.id,
       createdBy: req.user.id
     });
-    
+
     if (!quotation) {
       return res.status(404).json({ message: 'Quotation not found' });
     }
@@ -343,12 +344,12 @@ router.post('/:id/reject', auth, async (req, res) => {
     quotation.rejectedAt = new Date();
     quotation.rejectionReason = rejectionReason;
     await quotation.save();
-    
+
     // Update lead status to "Rejected"
-    await Lead.findByIdAndUpdate(quotation.lead, { 
+    await Lead.findByIdAndUpdate(quotation.lead, {
       status: 'Rejected'
     });
-    
+
     res.json({ message: 'Quotation rejected', quotation });
   } catch (error) {
     console.error('Error rejecting quotation:', error);
@@ -363,32 +364,32 @@ router.delete('/:id', auth, async (req, res) => {
       _id: req.params.id,
       createdBy: req.user.id
     });
-    
+
     if (!quotation) {
       return res.status(404).json({ message: 'Quotation not found' });
     }
-    
+
     const leadId = quotation.lead;
-    
+
     // Delete the quotation
     await Quotation.findByIdAndDelete(req.params.id);
-    
+
     // Update lead: decrement quotation count
-    await Lead.findByIdAndUpdate(leadId, { 
+    await Lead.findByIdAndUpdate(leadId, {
       $inc: { quotationCount: -1 }
     });
-    
+
     // Check if this was the last quotation for this lead
     const remainingQuotations = await Quotation.countDocuments({ lead: leadId });
-    
+
     // If no more quotations, update lead status back to previous state
     if (remainingQuotations === 0) {
-      await Lead.findByIdAndUpdate(leadId, { 
+      await Lead.findByIdAndUpdate(leadId, {
         status: 'contacted', // or whatever default status you want
         lastQuotationDate: null
       });
     }
-    
+
     res.json({ message: 'Quotation deleted successfully' });
   } catch (error) {
     console.error('Error deleting quotation:', error);

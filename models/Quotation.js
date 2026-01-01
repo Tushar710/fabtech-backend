@@ -118,8 +118,13 @@ const quotationSchema = new mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    refPath: 'createdByModel',
     required: true
+  },
+  createdByModel: {
+    type: String,
+    enum: ['User', 'Employee'],
+    default: 'User'
   },
   sentAt: {
     type: Date
@@ -138,25 +143,25 @@ const quotationSchema = new mongoose.Schema({
 });
 
 // Generate quotation number before saving (if not provided)
-quotationSchema.pre('save', async function(next) {
+quotationSchema.pre('save', async function (next) {
   if (this.isNew && !this.quotationNumber) {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const nextYear = currentYear + 1;
     const yearShort = currentYear.toString().slice(-2);
     const nextYearShort = nextYear.toString().slice(-2);
-    
+
     const count = await mongoose.model('Quotation').countDocuments({
       quotationNumber: { $regex: `^KFT-${yearShort}` }
     });
-    
+
     this.quotationNumber = `KFT-${yearShort}/${nextYearShort}-${count + 1}`;
   }
   next();
 });
 
 // Calculate totals before saving
-quotationSchema.pre('save', function(next) {
+quotationSchema.pre('save', function (next) {
   this.subtotal = this.items.reduce((sum, item) => sum + item.totalPrice, 0);
   this.taxAmount = (this.subtotal * this.taxRate) / 100;
   this.totalAmount = this.subtotal + this.taxAmount;
