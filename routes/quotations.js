@@ -111,26 +111,67 @@ router.post('/', auth, async (req, res) => {
     let subtotal = 0;
 
     for (const item of items) {
-      const product = await Product.findById(item.productId);
-      if (!product) {
-        return res.status(404).json({ message: `Product not found: ${item.productId}` });
+      let processedItem;
+      
+      // Check if this is a manual entry (no productId) or database product
+      if (!item.productId || item.productId === '') {
+        // Manual entry - use provided data directly
+        console.log('Processing manual entry:', item.productName);
+        console.log('Manual entry item data:', JSON.stringify(item, null, 2));
+        
+        const discount = item.discount || 0;
+        const unitPrice = parseFloat(item.unitPrice);
+        
+        // Validate unitPrice
+        if (isNaN(unitPrice) || unitPrice <= 0) {
+          console.error('Invalid unit price for manual entry:', item.unitPrice);
+          return res.status(400).json({ 
+            success: false,
+            message: `Invalid unit price for ${item.productName}. Please enter a valid price.` 
+          });
+        }
+        
+        const finalUnitPrice = unitPrice * (1 - discount / 100);
+        const totalPrice = finalUnitPrice * item.quantity;
+        subtotal += totalPrice;
+
+        processedItem = {
+          product: null, // No product reference for manual entries
+          productName: item.productName,
+          description: item.description || '',
+          productImage: item.productImage || '',
+          quantity: item.quantity,
+          unitPrice: finalUnitPrice,
+          discount: discount,
+          totalPrice: totalPrice
+        };
+        
+        console.log('✅ Manual entry processed:', processedItem);
+      } else {
+        // Database product - fetch from database
+        const product = await Product.findById(item.productId);
+        if (!product) {
+          return res.status(404).json({ message: `Product not found: ${item.productId}` });
+        }
+
+        const discount = item.discount || 0;
+        const finalUnitPrice = product.price * (1 - discount / 100);
+        const totalPrice = finalUnitPrice * item.quantity;
+        subtotal += totalPrice;
+
+        processedItem = {
+          product: product._id,
+          productName: product.name,
+          description: item.description || product.description,
+          productImage: item.productImage || (product.images && product.images.length > 0 ? product.images[0] : ''),
+          quantity: item.quantity,
+          unitPrice: finalUnitPrice,
+          discount: discount,
+          totalPrice: totalPrice
+        };
       }
-
-      const discount = item.discount || 0;
-      const finalUnitPrice = product.price * (1 - discount / 100);
-      const totalPrice = finalUnitPrice * item.quantity;
-      subtotal += totalPrice;
-
-      processedItems.push({
-        product: product._id,
-        productName: product.name,
-        description: item.description || product.description,
-        productImage: item.productImage || (product.images && product.images.length > 0 ? product.images[0] : ''),
-        quantity: item.quantity,
-        unitPrice: finalUnitPrice,
-        discount: discount,
-        totalPrice: totalPrice
-      });
+      
+      processedItems.push(processedItem);
     }
 
     // Calculate tax and total
@@ -175,7 +216,24 @@ router.post('/', auth, async (req, res) => {
     res.status(201).json(quotation);
   } catch (error) {
     console.error('Error creating quotation:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    
+    // Handle validation errors
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({ 
+        success: false,
+        message: 'Validation error',
+        errors: messages 
+      });
+    }
+    
+    res.status(500).json({ 
+      success: false,
+      message: 'Server error',
+      error: error.message 
+    });
   }
 });
 

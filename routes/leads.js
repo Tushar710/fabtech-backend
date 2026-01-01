@@ -119,6 +119,50 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// PATCH /api/leads/:id/unassign-employee - Unassign lead from employee
+// IMPORTANT: This must come BEFORE the /:id route to avoid route matching issues
+router.patch('/:id/unassign-employee', auth, async (req, res) => {
+  try {
+    console.log('🔄 Unassigning lead from employee:', req.params.id);
+    
+    let query = { _id: req.params.id };
+    if (req.companyId) {
+      query.companyId = req.companyId;
+    }
+    
+    const lead = await Lead.findOne(query);
+    
+    if (!lead) {
+      console.log('❌ Lead not found:', req.params.id);
+      return res.status(404).json({ message: 'Lead not found' });
+    }
+    
+    // Check if lead is assigned to an employee
+    if (!lead.assignedEmployee && !lead.assignedEmployeeName) {
+      console.log('⚠️ Lead is not assigned to any employee');
+      return res.status(400).json({ message: 'Lead is not assigned to any employee' });
+    }
+    
+    console.log('👤 Removing employee assignment:', lead.assignedEmployeeName);
+    
+    // Remove employee assignment
+    lead.assignedEmployee = null;
+    lead.assignedEmployeeName = null;
+    lead.lastContact = new Date();
+    
+    await lead.save();
+    
+    console.log('✅ Lead unassigned from employee successfully');
+    res.json({ 
+      message: 'Lead unassigned from employee successfully',
+      lead 
+    });
+  } catch (error) {
+    console.error('❌ Error unassigning lead from employee:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 // PATCH /api/leads/:id/unassign-branch - Unassign lead from branch
 // IMPORTANT: This must come BEFORE the /:id route to avoid route matching issues
 router.patch('/:id/unassign-branch', auth, async (req, res) => {
@@ -249,6 +293,14 @@ router.post('/', auth, async (req, res) => {
       createdByBranch: createdByBranch ? 'Yes' : 'No'
     });
     
+    // IMPORTANT: Sync source and sourceOfLead fields - prioritize req.body.source (from AutoCapture)
+    const leadSource = req.body.source || sourceOfLead || 'Website';
+    console.log('📍 Source field mapping:', {
+      'req.body.source': req.body.source,
+      'sourceOfLead': sourceOfLead,
+      'finalSource': leadSource
+    });
+    
     const lead = new Lead({
       name: leadName,
       customerName: leadName,
@@ -261,8 +313,8 @@ router.post('/', auth, async (req, res) => {
       company_name: leadCompany,
       productOfInterest: productOfInterest || 'Other',
       sector: sector || 'Other',
-      source: sourceOfLead || 'website',
-      sourceOfLead: sourceOfLead || 'Website',
+      source: leadSource,
+      sourceOfLead: leadSource, // Sync both fields with same value
       productCategory: productCategory || 'Software',
       status: status || 'new',
       priority: priority || 'medium',

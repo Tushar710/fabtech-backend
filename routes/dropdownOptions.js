@@ -7,14 +7,15 @@ const auth = require('../middleware/auth');
 router.get('/:category', async (req, res) => {
   try {
     const { category } = req.params;
+    const { companyId: queryCompanyId } = req.query; // Allow company ID from query parameter
     
     // Extract company ID and branch ID from token
     const token = req.header('Authorization')?.replace('Bearer ', '');
-    let companyId = null;
+    let companyId = queryCompanyId; // Use query parameter first
     let branchId = null;
     let userType = null;
     
-    if (token) {
+    if (token && !companyId) {
       try {
         const jwt = require('jsonwebtoken');
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
@@ -46,8 +47,15 @@ router.get('/:category', async (req, res) => {
       return res.json(branchOptions);
     }
 
-    // If user is company/admin, ONLY fetch company-level options (exclude branch options)
+    // If user is company/admin OR public access with companyId, fetch company-level options
     if (companyId && !branchId) {
+      console.log(`🔍 Querying dropdown options:`, {
+        category,
+        companyId,
+        branchId: null,
+        isActive: true
+      });
+      
       const options = await DropdownOption.find({
         category,
         companyId,
@@ -56,6 +64,12 @@ router.get('/:category', async (req, res) => {
       }).sort({ sortOrder: 1, label: 1 });
 
       console.log(`📊 Found ${options.length} ${category} company-level options for company ${companyId}`);
+      
+      // Log first option if exists
+      if (options.length > 0) {
+        console.log(`📝 Sample option:`, options[0]);
+      }
+      
       return res.json(options);
     }
 

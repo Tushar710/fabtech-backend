@@ -122,7 +122,7 @@ router.get('/my-tasks', auth, async (req, res) => {
 // Create new task
 router.post('/', auth, async (req, res) => {
   try {
-    const { title, description, assignedTo, priority, dueDate } = req.body;
+    const { title, description, assignedTo, priority, dueDate, reminderDate } = req.body;
     
     if (!title || !assignedTo) {
       return res.status(400).json({
@@ -188,6 +188,8 @@ router.post('/', auth, async (req, res) => {
       assignedToType: assignedTo === 'company' ? 'company' : 'employee',
       priority: priority || 'medium',
       dueDate,
+      reminderDate: reminderDate || null,
+      reminderSent: false,
       companyId,
       branchId: branchId,
       createdBy: req.user.id || req.user._id,
@@ -218,13 +220,21 @@ router.post('/', auth, async (req, res) => {
 router.put('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, assignedTo, priority, dueDate } = req.body;
+    const { title, description, assignedTo, priority, dueDate, reminderDate } = req.body;
     
     const task = await Task.findById(id);
     if (!task) {
       return res.status(404).json({
         success: false,
         message: 'Task not found'
+      });
+    }
+
+    // Check if task is completed - prevent editing
+    if (task.status === 'completed' && task.completionDate) {
+      return res.status(403).json({
+        success: false,
+        message: 'Cannot edit a completed task. Task is locked.'
       });
     }
 
@@ -242,6 +252,10 @@ router.put('/:id', auth, async (req, res) => {
     if (description !== undefined) task.description = description;
     if (priority) task.priority = priority;
     if (dueDate !== undefined) task.dueDate = dueDate;
+    if (reminderDate !== undefined) {
+      task.reminderDate = reminderDate;
+      task.reminderSent = false; // Reset reminder sent flag when reminder is updated
+    }
     
     if (assignedTo && assignedTo !== task.assignedTo.toString()) {
       const employee = await Employee.findById(assignedTo);
@@ -289,6 +303,14 @@ router.patch('/:id/status', auth, async (req, res) => {
       });
     }
 
+    // Check if task is already completed - prevent further updates
+    if (task.status === 'completed' && task.completionDate) {
+      return res.status(403).json({
+        success: false,
+        message: 'Cannot update a completed task. Task is locked.'
+      });
+    }
+
     // Add update to history
     const update = {
       status,
@@ -301,6 +323,12 @@ router.patch('/:id/status', auth, async (req, res) => {
 
     task.status = status;
     task.updates.push(update);
+    
+    // Set completion date when task is marked as completed
+    if (status === 'completed' && !task.completionDate) {
+      task.completionDate = new Date();
+      console.log('✅ Task completed on:', task.completionDate);
+    }
     
     await task.save();
 
