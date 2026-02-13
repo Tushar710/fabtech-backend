@@ -2,7 +2,7 @@
 
 ## Base URL
 ```
-http://localhost:5001/api/mobile
+https://fabtech-backend.onrender.com/api/mobile
 ```
 
 ## Authentication

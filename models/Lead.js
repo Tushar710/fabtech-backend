@@ -39,7 +39,7 @@ const leadSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false, // Made optional - email is not mandatory
     lowercase: true,
     trim: true
   },

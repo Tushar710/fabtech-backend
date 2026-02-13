@@ -7,7 +7,7 @@ const testCategoryAPI = async () => {
 
     // Get token from localStorage (you'll need to paste your actual token here)
     const token = process.argv[2];
-    
+
     if (!token) {
       console.log('❌ Please provide token as argument:');
       console.log('   node test-category-api.js YOUR_TOKEN_HERE\n');
@@ -18,14 +18,14 @@ const testCategoryAPI = async () => {
       process.exit(1);
     }
 
-    const API_URL = 'http://localhost:5001/api';
-    
+    const API_URL = 'https://fabtech-backend.onrender.com/api';
+
     console.log('📡 Testing endpoint: GET /api/product-categories/type/Trading');
     console.log('🔑 Token length:', token.length);
     console.log('');
 
     const response = await axios.get(`${API_URL}/product-categories/type/Trading`, {
-      headers: { 
+      headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }

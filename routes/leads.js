@@ -267,10 +267,10 @@ router.post('/', auth, async (req, res) => {
     const leadCompany = companyName || company_name || customerCompany;
     const leadEmail = email;
     
-    // Validation
-    if (!leadName || !leadEmail || !leadCompany) {
+    // Validation - only name and company are required, email is optional
+    if (!leadName || !leadCompany) {
       return res.status(400).json({ 
-        message: 'Customer name, email, and company are required' 
+        message: 'Customer name and company are required' 
       });
     }
     

@@ -9,32 +9,32 @@ async function testEmployeeTaskAssignment() {
     // Connect to database
     await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ Connected to MongoDB Atlas\n');
-    
+
     const Employee = require('./models/Employee');
-    
+
     // Get Test User
     const testUser = await Employee.findOne({ name: 'Test User' });
     if (!testUser) {
       console.log('❌ Test User not found!');
       return;
     }
-    
+
     console.log('👤 Test User (Creator):');
     console.log('   ID:', testUser._id.toString());
     console.log('   Name:', testUser.name);
     console.log('   Company:', testUser.company.toString());
-    
+
     // Get Tushar
     const tushar = await Employee.findOne({ email: 'pawartushar@gmail.com' });
     if (!tushar) {
       console.log('❌ Tushar not found!');
       return;
     }
-    
+
     console.log('\n👤 Tushar Pawar (Assignee):');
     console.log('   ID:', tushar._id.toString());
     console.log('   Name:', tushar.name);
-    
+
     // Generate token for Test User
     const token = jwt.sign({
       id: testUser._id.toString(),
@@ -45,12 +45,12 @@ async function testEmployeeTaskAssignment() {
       type: 'employee',
       _id: testUser._id.toString()
     }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
-    
+
     console.log('\n✅ Generated token for Test User');
-    
+
     // Create task via API
     console.log('\n📝 Creating task: Test User → Tushar Pawar');
-    
+
     const taskData = {
       title: 'Review Code Changes',
       description: 'Please review the latest backend changes and provide feedback',
@@ -60,9 +60,9 @@ async function testEmployeeTaskAssignment() {
       status: 'pending',
       dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString()
     };
-    
+
     const response = await axios.post(
-      'http://localhost:5001/api/tasks',
+      'https://fabtech-backend.onrender.com/api/tasks',
       taskData,
       {
         headers: {
@@ -71,16 +71,16 @@ async function testEmployeeTaskAssignment() {
         }
       }
     );
-    
+
     console.log('✅ Task created successfully!');
     console.log('   Task ID:', response.data.data._id);
     console.log('   Title:', response.data.data.title);
     console.log('   Assigned to:', response.data.data.assignedToName);
     console.log('   Created by:', response.data.data.createdBy);
-    
+
     // Verify - Get Tushar's tasks
     console.log('\n🔍 Verifying: Fetching Tushar\'s tasks...');
-    
+
     const tusharToken = jwt.sign({
       id: tushar._id.toString(),
       employeeId: tushar._id.toString(),
@@ -90,16 +90,16 @@ async function testEmployeeTaskAssignment() {
       type: 'employee',
       _id: tushar._id.toString()
     }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '7d' });
-    
+
     const tasksResponse = await axios.get(
-      'http://localhost:5001/api/tasks/my-tasks',
+      'https://fabtech-backend.onrender.com/api/tasks/my-tasks',
       {
         headers: {
           'Authorization': `Bearer ${tusharToken}`
         }
       }
     );
-    
+
     console.log('✅ Tushar now has', tasksResponse.data.data.length, 'task(s):');
     tasksResponse.data.data.forEach((task, i) => {
       console.log(`\n${i + 1}. ${task.title}`);
@@ -107,10 +107,10 @@ async function testEmployeeTaskAssignment() {
       console.log(`   Priority: ${task.priority}`);
       console.log(`   Assigned to: ${task.assignedToName}`);
     });
-    
+
     mongoose.connection.close();
     console.log('\n🎉 SUCCESS! Employee-to-employee task assignment working!');
-    
+
   } catch (error) {
     console.error('❌ Error:', error.response?.data || error.message);
     mongoose.connection.close();

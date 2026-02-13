@@ -26,11 +26,11 @@ async function checkAllEmployeesFormat() {
       console.log(`- ID: ${emp._id}`);
       console.log(`- Email: ${emp.email}`);
       console.log(`- Company: ${emp.company} (${typeof emp.company})`);
-      
+
       // Check format type
       const hasNewFields = emp.mobileNumber || emp.designation || emp.userUpi || emp.profileImage;
       const hasOldFields = emp.teamMemberEmail || emp.employeeId;
-      
+
       if (hasNewFields) {
         console.log(`- FORMAT: NEW ✅`);
         console.log(`  - mobileNumber: ${emp.mobileNumber || 'N/A'}`);
@@ -49,24 +49,24 @@ async function checkAllEmployeesFormat() {
     console.log('\n🔌 TESTING API ENDPOINT RESPONSE:');
     const axios = require('axios');
     try {
-      const response = await axios.get(`http://localhost:5001/api/employee/company/${companyId}`);
+      const response = await axios.get(`https://fabtech-backend.onrender.com/api/employee/company/${companyId}`);
       console.log('✅ API Response Status:', response.status);
       console.log('📊 API Employee Count:', response.data.data?.length || 0);
-      
+
       if (response.data.data && response.data.data.length > 0) {
         response.data.data.forEach((emp, index) => {
           console.log(`\n👤 API Employee ${index + 1}: ${emp.teamMemberName}`);
           console.log(`- ID: ${emp._id}`);
           console.log(`- Email: ${emp.email}`);
           console.log(`- Company: ${JSON.stringify(emp.company)}`);
-          
+
           // Check if API is returning populated company object
           if (emp.company && typeof emp.company === 'object' && emp.company._id) {
             console.log(`- Company Format: POPULATED OBJECT (${emp.company._id})`);
           } else {
             console.log(`- Company Format: STRING (${emp.company})`);
           }
-          
+
           // Check fields
           const hasNewFields = emp.mobileNumber || emp.designation || emp.userUpi;
           console.log(`- Has New Fields: ${hasNewFields ? 'YES' : 'NO'}`);

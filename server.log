@@ -1,6 +1,6 @@
 🚀 Server running on port 5001
-📍 API URL: http://localhost:5001
-🔗 Test endpoint: http://localhost:5001/api/leads
+📍 API URL: https://fabtech-backend.onrender.com
+🔗 Test endpoint: https://fabtech-backend.onrender.com/api/leads
 ✅ Connected to MongoDB
 2025-10-08T17:22:26.417Z - GET /api/employee-dashboard/dashboard
 Authorization header present

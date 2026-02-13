@@ -110,20 +110,33 @@ router.post('/', auth, async (req, res) => {
     const processedItems = [];
     let subtotal = 0;
 
+    console.log('📦 Processing items:', items.length);
+
     for (const item of items) {
+      console.log('🔍 Processing item:', {
+        productId: item.productId,
+        productName: item.productName,
+        unitPrice: item.unitPrice,
+        discount: item.discount,
+        isManualEntry: item.isManualEntry
+      });
+
       let processedItem;
 
-      // Check if this is a manual entry (no productId) or database product
-      if (!item.productId || item.productId === '') {
+      // Check if this is a manual entry
+      const isManualEntry = item.isManualEntry || !item.productId || item.productId === '' || item.productId.startsWith('manual_');
+
+      if (isManualEntry) {
         // Manual entry - use provided data directly
         console.log('Processing manual entry:', item.productName);
         console.log('Manual entry item data:', JSON.stringify(item, null, 2));
 
         const discount = item.discount || 0;
-        const unitPrice = parseFloat(item.unitPrice);
+        // Frontend sends unitPrice as the original price (before discount)
+        const originalUnitPrice = parseFloat(item.unitPrice);
 
         // Validate unitPrice
-        if (isNaN(unitPrice) || unitPrice <= 0) {
+        if (isNaN(originalUnitPrice) || originalUnitPrice <= 0) {
           console.error('Invalid unit price for manual entry:', item.unitPrice);
           return res.status(400).json({
             success: false,
@@ -131,7 +144,8 @@ router.post('/', auth, async (req, res) => {
           });
         }
 
-        const finalUnitPrice = unitPrice * (1 - discount / 100);
+        const discountAmount = (originalUnitPrice * discount) / 100;
+        const finalUnitPrice = originalUnitPrice - discountAmount;
         const totalPrice = finalUnitPrice * item.quantity;
         subtotal += totalPrice;
 
@@ -141,8 +155,10 @@ router.post('/', auth, async (req, res) => {
           description: item.description || '',
           productImage: item.productImage || '',
           quantity: item.quantity,
-          unitPrice: finalUnitPrice,
+          originalUnitPrice: originalUnitPrice, // Store original price
+          unitPrice: finalUnitPrice, // Store discounted price
           discount: discount,
+          discountAmount: discountAmount, // Store discount amount per unit
           totalPrice: totalPrice
         };
 
@@ -155,7 +171,9 @@ router.post('/', auth, async (req, res) => {
         }
 
         const discount = item.discount || 0;
-        const finalUnitPrice = product.price * (1 - discount / 100);
+        const originalUnitPrice = product.price;
+        const discountAmount = (originalUnitPrice * discount) / 100;
+        const finalUnitPrice = originalUnitPrice - discountAmount;
         const totalPrice = finalUnitPrice * item.quantity;
         subtotal += totalPrice;
 
@@ -165,8 +183,10 @@ router.post('/', auth, async (req, res) => {
           description: item.description || product.description,
           productImage: item.productImage || (product.images && product.images.length > 0 ? product.images[0] : ''),
           quantity: item.quantity,
-          unitPrice: finalUnitPrice,
+          originalUnitPrice: originalUnitPrice, // Store original price
+          unitPrice: finalUnitPrice, // Store discounted price
           discount: discount,
+          discountAmount: discountAmount, // Store discount amount per unit
           totalPrice: totalPrice
         };
       }
@@ -225,14 +245,19 @@ router.post('/', auth, async (req, res) => {
     console.error('Error creating quotation:', error);
     console.error('Error name:', error.name);
     console.error('Error message:', error.message);
-
-    // Handle validation errors
+    
+    // Log validation errors in detail
     if (error.name === 'ValidationError') {
-      const messages = Object.values(error.errors).map(err => err.message);
+      console.error('Validation errors:', error.errors);
+      const messages = Object.values(error.errors).map(err => {
+        console.error(`Field: ${err.path}, Message: ${err.message}, Value: ${err.value}`);
+        return `${err.path}: ${err.message}`;
+      });
       return res.status(400).json({
         success: false,
         message: 'Validation error',
-        errors: messages
+        errors: messages,
+        details: error.errors
       });
     }
 
@@ -247,6 +272,9 @@ router.post('/', auth, async (req, res) => {
 // Update quotation
 router.put('/:id', auth, async (req, res) => {
   try {
+    console.log('🔄 Updating quotation:', req.params.id);
+    console.log('📥 Update data:', req.body);
+
     const quotation = await Quotation.findOne({
       _id: req.params.id,
       createdBy: req.user.id
@@ -256,21 +284,129 @@ router.put('/:id', auth, async (req, res) => {
       return res.status(404).json({ message: 'Quotation not found' });
     }
 
-    // Don't allow updates to sent/accepted quotations
+    // Don't allow updates to accepted quotations
     if (quotation.status === 'accepted') {
       return res.status(400).json({ message: 'Cannot update accepted quotation' });
     }
 
-    Object.assign(quotation, req.body);
+    const {
+      items,
+      taxRate,
+      validUntil,
+      notes,
+      termsAndConditions,
+      warranty,
+      leadCompany,
+      leadAddress,
+      leadGST
+    } = req.body;
+
+    // Process items and calculate totals (same logic as create)
+    const processedItems = [];
+    let subtotal = 0;
+
+    for (const item of items) {
+      let processedItem;
+      const isManualEntry = item.isManualEntry || !item.productId || item.productId === '' || item.productId.startsWith('manual_');
+
+      if (isManualEntry) {
+        const discount = item.discount || 0;
+        const originalUnitPrice = parseFloat(item.unitPrice);
+
+        if (isNaN(originalUnitPrice) || originalUnitPrice <= 0) {
+          return res.status(400).json({
+            success: false,
+            message: `Invalid unit price for ${item.productName}`
+          });
+        }
+
+        const discountAmount = (originalUnitPrice * discount) / 100;
+        const finalUnitPrice = originalUnitPrice - discountAmount;
+        const totalPrice = finalUnitPrice * item.quantity;
+        subtotal += totalPrice;
+
+        processedItem = {
+          product: null,
+          productName: item.productName,
+          description: item.description || '',
+          productImage: item.productImage || '',
+          quantity: item.quantity,
+          originalUnitPrice: originalUnitPrice,
+          unitPrice: finalUnitPrice,
+          discount: discount,
+          discountAmount: discountAmount,
+          totalPrice: totalPrice
+        };
+      } else {
+        const product = await Product.findById(item.productId);
+        if (!product) {
+          return res.status(404).json({ message: `Product not found: ${item.productId}` });
+        }
+
+        const discount = item.discount || 0;
+        const originalUnitPrice = product.price;
+        const discountAmount = (originalUnitPrice * discount) / 100;
+        const finalUnitPrice = originalUnitPrice - discountAmount;
+        const totalPrice = finalUnitPrice * item.quantity;
+        subtotal += totalPrice;
+
+        processedItem = {
+          product: product._id,
+          productName: product.name,
+          description: item.description || product.description,
+          productImage: item.productImage || (product.images && product.images.length > 0 ? product.images[0] : ''),
+          quantity: item.quantity,
+          originalUnitPrice: originalUnitPrice,
+          unitPrice: finalUnitPrice,
+          discount: discount,
+          discountAmount: discountAmount,
+          totalPrice: totalPrice
+        };
+      }
+
+      processedItems.push(processedItem);
+    }
+
+    // Calculate tax and total
+    const taxAmount = (subtotal * (taxRate || 18)) / 100;
+    const totalAmount = subtotal + taxAmount;
+
+    // Update quotation fields
+    quotation.items = processedItems;
+    quotation.subtotal = subtotal;
+    quotation.taxRate = taxRate || 18;
+    quotation.taxAmount = taxAmount;
+    quotation.totalAmount = totalAmount;
+    quotation.validUntil = validUntil || quotation.validUntil;
+    quotation.notes = notes;
+    quotation.termsAndConditions = termsAndConditions;
+    quotation.warranty = warranty;
+    quotation.leadCompany = leadCompany;
+    quotation.leadAddress = leadAddress;
+    quotation.leadGST = leadGST;
+
     await quotation.save();
 
     await quotation.populate('lead', 'name email phone');
     await quotation.populate('items.product', 'name sku');
 
+    console.log('✅ Quotation updated successfully');
+    console.log('📋 Updated quotation number:', quotation.quotationNumber);
+    console.log('📋 Updated quotation ID:', quotation._id);
     res.json(quotation);
   } catch (error) {
     console.error('Error updating quotation:', error);
-    res.status(500).json({ message: 'Server error' });
+    
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({
+        success: false,
+        message: 'Validation error',
+        errors: messages
+      });
+    }
+    
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 

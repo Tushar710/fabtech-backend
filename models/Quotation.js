@@ -21,6 +21,11 @@ const quotationItemSchema = new mongoose.Schema({
     required: true,
     min: 1
   },
+  originalUnitPrice: {
+    type: Number,
+    required: false, // Made optional for backward compatibility
+    min: 0
+  },
   unitPrice: {
     type: Number,
     required: true,
@@ -31,6 +36,11 @@ const quotationItemSchema = new mongoose.Schema({
     default: 0,
     min: 0,
     max: 100
+  },
+  discountAmount: {
+    type: Number,
+    default: 0,
+    min: 0
   },
   totalPrice: {
     type: Number,
@@ -55,7 +65,7 @@ const quotationSchema = new mongoose.Schema({
   },
   leadEmail: {
     type: String,
-    required: true
+    required: false // Made optional since lead email is now optional
   },
   leadPhone: {
     type: String

@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^api/(.*)$ http://localhost:5001/$1 [P,L]
+RewriteRule ^api/(.*)$ https://fabtech-backend.onrender.com/$1 [P,L]

@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 // Configuration
-const BASE_URL = 'http://localhost:5001/api';
+const BASE_URL = 'https://fabtech-backend.onrender.com/api';
 let authToken = '';
 
 // Test data
@@ -31,14 +31,14 @@ function log(message, color = 'reset') {
 async function testRegisterCompany() {
   try {
     log('\n📝 Test 0: Register/Check Test Company', 'blue');
-    
+
     // Try to login first to check if company exists
     try {
       const loginResponse = await axios.post(`${BASE_URL}/company-auth/login`, {
         email: testCompany.email,
         password: testCompany.password
       });
-      
+
       if (loginResponse.data.success) {
         authToken = loginResponse.data.token;
         log('✅ Test company already exists and login successful', 'green');
@@ -47,7 +47,7 @@ async function testRegisterCompany() {
     } catch (loginError) {
       // Company doesn't exist, create it
       log('ℹ️  Test company not found, creating new one...', 'yellow');
-      
+
       const registerResponse = await axios.post(`${BASE_URL}/company-auth/register`, {
         name: testCompany.name,
         companyCode: testCompany.companyCode,
@@ -60,13 +60,13 @@ async function testRegisterCompany() {
       if (registerResponse.data.success) {
         log('✅ Test company registered successfully', 'green');
         log(`Company Code: ${registerResponse.data.company.companyCode}`, 'yellow');
-        
+
         // Now login with the new company
         const loginResponse = await axios.post(`${BASE_URL}/company-auth/login`, {
           email: testCompany.email,
           password: testCompany.password
         });
-        
+
         if (loginResponse.data.success) {
           authToken = loginResponse.data.token;
           log('✅ Login successful with new company', 'green');
@@ -189,17 +189,17 @@ async function testChangePasswordCorrect() {
 
     if (response.data.success) {
       log('✅ Password changed successfully', 'green');
-      
+
       // Update test password for future tests
       testCompany.password = 'newtest123';
-      
+
       // Try logging in with new password
       log('\n🔄 Testing login with new password...', 'yellow');
       const loginResponse = await axios.post(`${BASE_URL}/company-auth/login`, {
         email: testCompany.email,
         password: testCompany.password
       });
-      
+
       if (loginResponse.data.success) {
         log('✅ Login with new password successful', 'green');
         authToken = loginResponse.data.token;
@@ -238,7 +238,7 @@ async function testChangePasswordBack() {
 // Run all tests
 async function runAllTests() {
   log('🚀 Starting Company Profile API Tests', 'blue');
-  log('=' .repeat(50), 'blue');
+  log('='.repeat(50), 'blue');
 
   const results = {
     total: 0,
@@ -266,12 +266,12 @@ async function runAllTests() {
     }
   }
 
-  log('\n' + '=' .repeat(50), 'blue');
+  log('\n' + '='.repeat(50), 'blue');
   log('📊 Test Results:', 'blue');
   log(`Total Tests: ${results.total}`, 'yellow');
   log(`Passed: ${results.passed}`, 'green');
   log(`Failed: ${results.failed}`, results.failed > 0 ? 'red' : 'green');
-  log('=' .repeat(50), 'blue');
+  log('='.repeat(50), 'blue');
 }
 
 // Run tests
