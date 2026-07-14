@@ -176,10 +176,14 @@ router.get('/leads', async (req, res) => {
       query.company = companyObjectId;
     }
     
+    const limit = parseInt(req.query.limit) || 500000;
+    
     const leads = await Lead.find(query)
       .populate('assignedEmployee', 'teamMemberName email')
       .populate('createdBy', 'teamMemberName email')
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .lean();
 
     console.log(`✅ Found ${leads.length} leads for branch:`, decoded.branchId);
     

@@ -104,11 +104,56 @@ router.post('/', async (req, res) => {
   }
 });
 
+// POST /api/lead/bulk-import - Bulk import leads
+router.post('/bulk-import', async (req, res) => {
+  try {
+    const leadsData = req.body.leads || [];
+    if (!Array.isArray(leadsData) || leadsData.length === 0) {
+      return res.status(400).json({ success: false, message: 'No leads provided for import' });
+    }
+
+    const formattedLeads = leadsData.map(item => {
+      const leadName = item.name || item.customerName || 'Unknown Lead';
+      const leadPhone = item.phone || item.contactNumber || '';
+      const leadEmail = item.email || '';
+      const leadCompany = item.companyName || item.customerCompany || item.company_name || '';
+      return {
+        name: leadName,
+        customerName: leadName,
+        phone: leadPhone,
+        contactNumber: leadPhone,
+        email: leadEmail ? leadEmail.toLowerCase() : '',
+        address: item.address || '',
+        companyName: leadCompany,
+        customerCompany: leadCompany,
+        company_name: leadCompany,
+        productOfInterest: item.productOfInterest || 'Other',
+        sector: item.sector || 'Other',
+        sourceOfLead: item.sourceOfLead || item.source || 'Imported Excel',
+        productCategory: item.productCategory || 'Standard',
+        status: item.status || 'new',
+        priority: item.priority || 'medium',
+        value: Number(item.value) || 0,
+        budget: item.budget || '',
+        notes: item.notes || '',
+        title: item.title || '',
+        date: item.date ? new Date(item.date) : new Date()
+      };
+    });
+
+    const inserted = await Lead.insertMany(formattedLeads, { ordered: false });
+    res.status(201).json({ success: true, count: inserted.length, data: inserted });
+  } catch (error) {
+    console.error('Error during bulk import:', error);
+    res.status(500).json({ success: false, message: 'Error bulk importing leads', error: error.message });
+  }
+});
+
 // GET /api/lead - Get all leads
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 1000; // Default to high limit to show all leads
+    const limit = parseInt(req.query.limit) || 500000; // Default to high limit (500,000) to show all leads
     const skip = (page - 1) * limit;
     
     // Build query
@@ -172,7 +217,8 @@ router.get('/', async (req, res) => {
     const leads = await Lead.find(query)
       .sort(sortOptions)
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .lean();
     
     const total = await Lead.countDocuments(query);
     

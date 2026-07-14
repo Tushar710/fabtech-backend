@@ -8,13 +8,13 @@ router.get('/:category', async (req, res) => {
   try {
     const { category } = req.params;
     const { companyId: queryCompanyId } = req.query; // Allow company ID from query parameter
-    
+
     // Extract company ID and branch ID from token
     const token = req.header('Authorization')?.replace('Bearer ', '');
     let companyId = queryCompanyId; // Use query parameter first
     let branchId = null;
     let userType = null;
-    
+
     if (token && !companyId) {
       try {
         const jwt = require('jsonwebtoken');
@@ -55,7 +55,7 @@ router.get('/:category', async (req, res) => {
         branchId: null,
         isActive: true
       });
-      
+
       const options = await DropdownOption.find({
         category,
         companyId,
@@ -64,12 +64,12 @@ router.get('/:category', async (req, res) => {
       }).sort({ sortOrder: 1, label: 1 });
 
       console.log(`📊 Found ${options.length} ${category} company-level options for company ${companyId}`);
-      
+
       // Log first option if exists
       if (options.length > 0) {
         console.log(`📝 Sample option:`, options[0]);
       }
-      
+
       return res.json(options);
     }
 
@@ -300,11 +300,11 @@ router.post('/initialize', auth, async (req, res) => {
     }
 
     // Check if options already exist for this scope
-    const existingOptions = await DropdownOption.countDocuments({ 
+    const existingOptions = await DropdownOption.countDocuments({
       companyId,
       branchId: branchId || null
     });
-    
+
     if (existingOptions > 0) {
       return res.status(400).json({ error: 'Dropdown options already initialized for this scope' });
     }
@@ -350,7 +350,7 @@ router.post('/initialize', auth, async (req, res) => {
       { category: 'sourceOfLead', label: 'Partner', value: 'Partner', sortOrder: 9 },
       { category: 'sourceOfLead', label: 'Other', value: 'Other', sortOrder: 10 },
 
-      // Product Category
+      //Product Category
       { category: 'productCategory', label: 'Software', value: 'Software', sortOrder: 1 },
       { category: 'productCategory', label: 'Hardware', value: 'Hardware', sortOrder: 2 },
       { category: 'productCategory', label: 'Services', value: 'Services', sortOrder: 3 },
@@ -389,11 +389,11 @@ router.post('/initialize', auth, async (req, res) => {
     }));
 
     await DropdownOption.insertMany(optionsToCreate);
-    
+
     const scope = branchId ? 'branch' : 'company';
-    res.json({ 
-      message: `Default dropdown options initialized successfully for ${scope}`, 
-      count: optionsToCreate.length 
+    res.json({
+      message: `Default dropdown options initialized successfully for ${scope}`,
+      count: optionsToCreate.length
     });
   } catch (error) {
     console.error('Error initializing dropdown options:', error);

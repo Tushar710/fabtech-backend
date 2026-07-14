@@ -9,7 +9,7 @@ const { sendWelcomeMessage } = require('./whatsappSimple');
 router.get('/', auth, async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 1000; // Default to high limit to show all leads
+    const limit = parseInt(req.query.limit) || 500000; // Default to high limit (500,000) to show all leads
     const skip = (page - 1) * limit;
     
     // Build query with company filtering
@@ -81,27 +81,40 @@ router.get('/', auth, async (req, res) => {
       .skip(skip)
       .lean();
 
-    // Get Quotation model to fetch rejected quotations
+    // Get Quotation model to fetch rejected quotations in BATCH (not per-lead)
     const Quotation = require('../models/Quotation');
     
-    // Add default title and fetch rejected quotation info for each lead
-    const leadsWithTitle = await Promise.all(leads.map(async (lead) => {
-      // Find the most recent rejected quotation for this lead
-      const rejectedQuotation = await Quotation.findOne({
-        lead: lead._id,
-        status: 'rejected',
-        rejectionReason: { $exists: true, $ne: null, $ne: '' }
-      })
-      .sort({ rejectedAt: -1 })
-      .select('rejectionReason rejectedAt quotationNumber')
-      .lean();
+    // Batch fetch: Get all rejected quotations for these leads in a single query
+    const leadIds = leads.map(l => l._id);
+    let rejectedQuotationsMap = {};
+    
+    try {
+      const rejectedQuotations = await Quotation.aggregate([
+        { $match: { lead: { $in: leadIds }, status: 'rejected', rejectionReason: { $exists: true, $ne: null, $ne: '' } } },
+        { $sort: { rejectedAt: -1 } },
+        { $group: { _id: '$lead', rejectionReason: { $first: '$rejectionReason' }, rejectedAt: { $first: '$rejectedAt' }, quotationNumber: { $first: '$quotationNumber' } } }
+      ]);
       
+      rejectedQuotations.forEach(q => {
+        rejectedQuotationsMap[q._id.toString()] = {
+          rejectionReason: q.rejectionReason,
+          rejectedAt: q.rejectedAt,
+          quotationNumber: q.quotationNumber
+        };
+      });
+    } catch (quotErr) {
+      console.warn('⚠️ Could not fetch rejected quotations:', quotErr.message);
+    }
+    
+    // Map leads with title and rejected quotation info (no per-lead DB calls)
+    const leadsWithTitle = leads.map(lead => {
+      const rejectedQuotation = rejectedQuotationsMap[lead._id.toString()] || null;
       return {
         ...lead,
         title: lead.title || `${lead.name || 'Lead'} - ${lead.companyName || 'General Enquiry'}`,
-        rejectedQuotation: rejectedQuotation || null
+        rejectedQuotation
       };
-    }));
+    });
 
     const total = await Lead.countDocuments(query);
     
@@ -369,6 +382,57 @@ router.post('/', auth, async (req, res) => {
   } catch (error) {
     console.error('Error creating lead:', error);
     res.status(500).json({ message: 'Server error while creating lead' });
+  }
+});
+
+// POST /api/leads/bulk-import - Bulk import leads
+router.post('/bulk-import', auth, async (req, res) => {
+  try {
+    console.log('📦 Bulk import request received:', req.body?.leads?.length);
+    const leadsData = req.body.leads || [];
+    if (!Array.isArray(leadsData) || leadsData.length === 0) {
+      return res.status(400).json({ success: false, message: 'No leads provided for import' });
+    }
+
+    const formattedLeads = leadsData.map(item => {
+      const leadName = item.name || item.customerName || 'Unknown Lead';
+      const leadPhone = item.phone || item.contactNumber || '';
+      const leadEmail = item.email || '';
+      const leadCompany = item.companyName || item.customerCompany || item.company_name || '';
+      return {
+        name: leadName,
+        customerName: leadName,
+        phone: leadPhone,
+        contactNumber: leadPhone,
+        email: leadEmail ? leadEmail.toLowerCase() : '',
+        address: item.address || '',
+        companyName: leadCompany,
+        customerCompany: leadCompany,
+        company_name: leadCompany,
+        productOfInterest: item.productOfInterest || 'Other',
+        sector: item.sector || 'Other',
+        sourceOfLead: item.sourceOfLead || item.source || 'Imported Excel',
+        productCategory: item.productCategory || 'Standard',
+        status: item.status || 'new',
+        priority: item.priority || 'medium',
+        value: Number(item.value) || 0,
+        budget: item.budget || '',
+        notes: item.notes || '',
+        title: item.title || '',
+        date: item.date ? new Date(item.date) : new Date(),
+        department: [],
+        teamMember: [],
+        images: [],
+        tags: [],
+        followUps: []
+      };
+    });
+
+    const inserted = await Lead.insertMany(formattedLeads, { ordered: false });
+    res.status(201).json({ success: true, count: inserted.length, data: inserted });
+  } catch (error) {
+    console.error('Error during bulk import:', error);
+    res.status(500).json({ success: false, message: 'Error bulk importing leads', error: error.message });
   }
 });
 

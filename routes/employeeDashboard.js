@@ -193,7 +193,7 @@ router.get('/leads', async (req, res) => {
     
     console.log('📋 Query filter set:', query);
 
-    const { status, page = 1, limit = 1000 } = req.query;
+    const { status, page = 1, limit = 500000 } = req.query;
 
     if (status && status !== 'all') {
       query.status = status;
