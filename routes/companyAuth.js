@@ -83,6 +83,7 @@ router.post('/login', async (req, res) => {
 router.get('/dashboard', authenticateCompany, async (req, res) => {
   try {
     const companyId = req.company.companyId;
+    const companyDoc = await Company.findById(companyId);
 
     // Get departments count
     const departmentsCount = await Department.countDocuments({ 
@@ -117,18 +118,45 @@ router.get('/dashboard', authenticateCompany, async (req, res) => {
       }
     ]);
 
+    // Get full employees list for access control tab
+    const employees = await Employee.find({
+      $or: [
+        { company: companyId },
+        { company: companyDoc?._id || companyId }
+      ],
+      isActive: { $ne: false }
+    }).populate('department', 'name').sort({ createdAt: -1 });
+
+    const formattedEmployees = employees.map(emp => {
+      const empObj = emp.toJSON();
+      const permissionsObj = {};
+      if (Array.isArray(emp.accessPermissions)) {
+        emp.accessPermissions.forEach(p => {
+          if (typeof p === 'string') {
+            permissionsObj[p] = true;
+          } else if (p && typeof p === 'object' && p.feature) {
+            permissionsObj[p.feature] = p.enabled !== false;
+          }
+        });
+      }
+      empObj.permissions = permissionsObj;
+      return empObj;
+    });
+
     res.json({
       success: true,
       data: {
         company: {
-          name: req.company.businessName,
-          code: req.company.companyCode
+          name: companyDoc?.businessName || req.company.businessName,
+          code: companyDoc?.companyCode || req.company.companyCode,
+          createdAt: companyDoc?.createdAt || new Date()
         },
         stats: {
           departments: departmentsCount,
           employees: employeesCount
         },
-        departments
+        departments,
+        employees: formattedEmployees
       }
     });
 
