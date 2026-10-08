@@ -171,7 +171,9 @@ router.post('/', auth, async (req, res) => {
         }
 
         const discount = item.discount || 0;
-        const originalUnitPrice = product.price;
+        const originalUnitPrice = (item.unitPrice !== undefined && !isNaN(parseFloat(item.unitPrice))) 
+          ? parseFloat(item.unitPrice) 
+          : product.price;
         const discountAmount = (originalUnitPrice * discount) / 100;
         const finalUnitPrice = originalUnitPrice - discountAmount;
         const totalPrice = finalUnitPrice * item.quantity;
@@ -344,7 +346,9 @@ router.put('/:id', auth, async (req, res) => {
         }
 
         const discount = item.discount || 0;
-        const originalUnitPrice = product.price;
+        const originalUnitPrice = (item.unitPrice !== undefined && !isNaN(parseFloat(item.unitPrice))) 
+          ? parseFloat(item.unitPrice) 
+          : product.price;
         const discountAmount = (originalUnitPrice * discount) / 100;
         const finalUnitPrice = originalUnitPrice - discountAmount;
         const totalPrice = finalUnitPrice * item.quantity;
